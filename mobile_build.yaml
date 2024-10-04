@@ -1,0 +1,2828 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2820
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 kiosk_mode:\
+  hide_header: true\
+  hide_menubar: true\
+  ignore_entity_settings: true\
+  entity_settings:\
+    - entity:\
+        input_boolean.kiosk_mode: 'on'\
+      hide_header: true\
+    - entity:\
+        input_boolean.kiosk_mode: 'off'\
+      hide_header: false\
+views:\
+  - title: Mobile\
+    path: mobile\
+    cards:\
+      - type: vertical-stack\
+        cards:\
+          - type: markdown\
+            content: |-\
+              \{% if today_at("07:00") <= now() < today_at("12:00") -%\}\
+               <ha-icon icon="mdi:white-balance-sunny">\
+               </ha-icon> Good morning\
+              \{% elif today_at("12:00") <= now() < today_at("18:00") -%\}\
+               <ha-icon icon="mdi:white-balance-sunny">\
+               </ha-icon> \
+                Good afternoon\
+              \{% elif today_at("18:00") <= now() < today_at("23:59:59") -%\}\
+               <ha-icon icon="mdi:weather-night">\
+               </ha-icon> \
+               Good evening\
+              \{% elif today_at("00:00") <= now() < today_at("07:00") -%\}\
+               <ha-icon icon="mdi:weather-night">\
+               </ha-icon>\
+               Good evening \
+              \{%- endif %\} Family!\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  background: rgba(0,0,0,0);\
+                  box-shadow: none;\
+                  border: 0px;\
+                \}\
+          - square: false\
+            type: grid\
+            cards:\
+              - type: custom:mushroom-person-card\
+                entity: person.hassio\
+                icon_type: entity-picture\
+                layout: vertical\
+                primary_info: none\
+                fill_container: false\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      background: rgba(0,0,0,0);\
+                      box-shadow: none;\
+                      border: 0px;\
+                    \}\
+              - type: custom:mushroom-person-card\
+                entity: person.shannon\
+                icon_type: entity-picture\
+                layout: vertical\
+                primary_info: none\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      background: rgba(0,0,0,0);\
+                      box-shadow: none;\
+                      border: 0px;\
+                    \}\
+              - type: custom:mushroom-person-card\
+                icon_type: entity-picture\
+                layout: vertical\
+                primary_info: none\
+                entity: person.gertie\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      background: rgba(0,0,0,0);\
+                      box-shadow: none;\
+                      border: 0px;\
+                    \}\
+              - type: custom:mushroom-person-card\
+                icon_type: entity-picture\
+                layout: vertical\
+                primary_info: none\
+                entity: person.kellan\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      background: rgba(0,0,0,0);\
+                      box-shadow: none;\
+                      border: 0px;\
+                    \}\
+            columns: 4\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                name: Trash Today\
+                entity: calendar.waste\
+                visibility:\
+                  - condition: state\
+                    entity: calendar.waste\
+                    state: 'on'\
+                tap_action:\
+                  action: ''\
+                hold_action:\
+                  action: ''\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:trash-can\
+                    color: rgb(128,128,128)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgb(128,128,128)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                  - value: 'off'\
+                    icon: mdi:trash-can\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                styles:\
+                  card:\
+                    - height: 75px\
+                    - border-radius: 0%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 100%\
+                    - height: 100%\
+                    - top: 0%\
+              - type: custom:button-card\
+                color_type: blank-card\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                name: Trash & Recycling Today\
+                entity: calendar.waste_recycling\
+                visibility:\
+                  - condition: state\
+                    entity: calendar.waste_recycling\
+                    state: 'on'\
+                tap_action:\
+                  action: ''\
+                hold_action:\
+                  action: ''\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:recycle\
+                    color: rgb(45, 85, 255)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(45, 85, 255)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                  - value: 'off'\
+                    icon: mdi:recycle-variant\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                styles:\
+                  card:\
+                    - height: 75px\
+                    - border-radius: 0%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 75%\
+                    - height: 100%\
+                    - top: 0%\
+              - type: custom:button-card\
+                color_type: blank-card\
+          - type: custom:mushroom-title-card\
+            style: |\
+              ha-card \{\
+                background: rgba(255, 255, 255, 0.5);\
+                border: none;\
+              \}\
+            title: ''\
+            subtitle: Doors\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                name: Front Door\
+                entity: lock.entryway_lock\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: unlocked\
+                    icon: mdi:lock-open-variant-outline\
+                    color: red\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                      state:\
+                        - color: white\
+                        - font-size: 8px\
+                  - value: locked\
+                    icon: mdi:lock-outline\
+                    color: green\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                      state:\
+                        - color: gray\
+                        - font-size: 8px\
+                styles:\
+                  card:\
+                    - height: 75px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 100%\
+                    - height: 100%\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Garage Door\
+                entity: cover.ratgdov25i_ca0e39_door\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: open\
+                    icon: mdi:garage-open-variant\
+                    color: red\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                      state:\
+                        - color: white\
+                        - font-size: 8px\
+                  - value: closed\
+                    icon: mdi:garage-variant\
+                    color: green\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                      state:\
+                        - color: gray\
+                        - font-size: 8px\
+                styles:\
+                  card:\
+                    - height: 75px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 100%\
+                    - height: 100%\
+                    - top: 0%\
+          - type: custom:mushroom-title-card\
+            style: |\
+              ha-card \{\
+                background: rgba(255, 255, 255, 0.5);\
+                border: none;\
+              \}\
+            title: ''\
+            subtitle: Lights\
+            subtitle_tap_action:\
+              action: navigate\
+              navigation_path: /lights-switches/all-lights\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                name: Living Room\
+                entity: light.living_room\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:lamps\
+                    color: rgb(255,241,224)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,241,224)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                  - value: 'off'\
+                    icon: mdi:lamps-outline\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - height: ''\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Front Lights\
+                entity: light.outside_lights_front\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:outdoor-lamp\
+                    color: RGB(255,255,255)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,255,255)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                  - value: 'off'\
+                    icon: mdi:outdoor-lamp\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Outside Rear\
+                entity: light.outside_lights_rear\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:string-lights\
+                    color: rgb(255,255,255)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,255,255)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 15px\
+                  - value: 'off'\
+                    icon: mdi:string-lights\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 15px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - top: 0%\
+          - type: custom:mushroom-title-card\
+            style: |\
+              ha-card \{\
+                background: rgba(255, 255, 255, 0.5);\
+                border: none;\
+              \}\
+            title: ''\
+            subtitle: Misc Lights & Switches\
+            subtitle_tap_action:\
+              action: navigate\
+              navigation_path: /lights-switches/all-lights\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                name: Night Light\
+                entity: light.bedroom_lamp\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:desk-lamp\
+                    color: rgb(255,241,224)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,241,224)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 10px\
+                  - value: 'off'\
+                    icon: mdi:desk-lamp-off\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 10px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - height: ''\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Bed Fan\
+                entity: fan.bedroom_fan_socket_1\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:fan\
+                    color: rgb(0,128,0)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                      icon:\
+                        - animation: rotating 2s linear infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 10px\
+                  - value: 'off'\
+                    icon: mdi:fan-off\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 10px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - height: ''\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Shop Lights\
+                entity: light.smart_power_strip_socket_4\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:light-switch\
+                    color: rgb(255,255,255)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,255,255)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 10px\
+                  - value: 'off'\
+                    icon: mdi:light-switch-off\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 10px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - height: ''\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Pool Pump\
+                entity: switch.pool_pump_3\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:pump\
+                    color: rgb(0,255,255)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(0,255,255)\
+                      icon:\
+                        - animation: rotating 2s linear infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 10px\
+                  - value: 'off'\
+                    icon: mdi:pump-off\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 10px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - height: ''\
+                    - top: 0%\
+              - type: custom:button-card\
+                name: Xmass Tree\
+                entity: light.bedroom_lamp\
+                tap_action:\
+                  action: toggle\
+                hold_action:\
+                  action: more-info\
+                show_name: true\
+                show_state: false\
+                state:\
+                  - value: 'on'\
+                    icon: mdi:pine-tree\
+                    color: rgb(0,128,0)\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                      icon:\
+                        - animation: blink 4s ease infinite\
+                      name:\
+                        - color: white\
+                        - font-size: 10px\
+                  - value: 'off'\
+                    icon: mdi:pine-tree-variant-outline\
+                    color: gray\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                      name:\
+                        - color: gray\
+                        - font-size: 10px\
+                styles:\
+                  card:\
+                    - height: 50px\
+                    - border-radius: 5%\
+                    - background: rgb(0,0,0,0.6)\
+                  icon:\
+                    - width: 35px\
+                    - height: ''\
+                    - top: 0%\
+      - type: custom:mushroom-chips-card\
+        card_mod:\
+          style: |\
+            ha-card \{ --chip-background: none; \}\
+            :host \{\
+              z-index: 2;\
+              position: fixed;\
+              bottom: 0;\
+              background: none;\
+              padding: 25px;\
+              margin: 0 !important;\
+              left: 50%;\
+              transform: translateX(-50%);\
+              width: calc(100% - 34px);\
+              \
+            \}\
+        chips:\
+          - type: menu\
+          - type: spacer\
+          - type: template\
+            icon: mdi:page-first\
+            tap_action:\
+              action: navigate\
+              navigation_path: /mobile-2/mobile\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                \}\
+          - type: template\
+            icon: mdi:page-last\
+            tap_action:\
+              action: navigate\
+              navigation_path: /mobile-2/mobile-page-2\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                \}\
+          - type: template\
+            icon: >-\
+              \{\{ is_state("input_boolean.kiosk_mode", "off") |\
+              iif("mdi:arrow-expand-all", "mdi:arrow-collapse-all") \}\}\
+            entity: input_boolean.kiosk_mode\
+            tap_action:\
+              action: toggle\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                \{% if is_state('input_boolean.kiosk_mode', 'on') %\}\
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                \{% elif is_state('input_boolean.kiosk_mode', 'off') %\}  \
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                \{% endif %\}\
+                \}\
+    badges:\
+      - type: custom:button-card\
+        name: Door Cam\
+        entity: alarm_control_panel.blink_front_door\
+        visibility:\
+          - condition: state\
+            entity: alarm_control_panel.blink_front_door\
+            state: armed_away\
+        tap_action:\
+          action: more-info\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: armed_away\
+            icon: mdi:doorbell-video\
+            color: rgb(0,128,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 8px\
+          - value: disarmed\
+            icon: mdi:doorbell-video\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 8px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: House Cams\
+        entity: alarm_control_panel.blink_cams\
+        visibility:\
+          - condition: state\
+            entity: alarm_control_panel.blink_cams\
+            state: armed_away\
+        tap_action:\
+          action: more-info\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: armed_away\
+            icon: mdi:shield-home\
+            color: rgb(0,128,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: disarmed\
+            icon: mdi:shield-home-outline\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: The Place\
+        entity: alarm_control_panel.blink_the_place\
+        visibility:\
+          - condition: state\
+            entity: alarm_control_panel.blink_the_place\
+            state: armed_away\
+        tap_action:\
+          action: more-info\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: armed_away\
+            icon: mdi:caravan\
+            color: rgb(0,128,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: disarmed\
+            icon: mdi:caravan\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Fridge Open\
+        entity: binary_sensor.refrigerator_contact\
+        visibility:\
+          - condition: state\
+            entity: binary_sensor.refrigerator_contact\
+            state: 'on'\
+        tap_action:\
+          action: toggle\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:fridge-alert-outline\
+            color: rgb(255,0,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:fridge-outline\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Dishwasher\
+        entity: switch.dishwasher\
+        visibility:\
+          - condition: state\
+            entity: switch.dishwasher\
+            state: 'on'\
+        tap_action:\
+          action: toggle\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:dishwasher\
+            color: rgb(0,255,255)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,255,255)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:dishwasher-off\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Washer\
+        entity: sensor.washer\
+        visibility:\
+          - condition: state\
+            entity: sensor.washer\
+            state: 'on'\
+        tap_action:\
+          action: toggle\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:washing-machine\
+            color: rgb(255,0,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 14px\
+          - value: 'off'\
+            icon: mdi:washing-machine-off\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Trash & Recycling\
+        entity: calendar.waste_recycling\
+        visibility:\
+          - condition: state\
+            entity: calendar.waste_recycling\
+            state: 'on'\
+        tap_action:\
+          action: ''\
+        hold_action:\
+          action: ''\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:recycle\
+            color: rgb(45, 85, 255)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(45, 85, 255)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:recycle\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Trash\
+        entity: calendar.waste\
+        visibility:\
+          - condition: state\
+            entity: calendar.waste\
+            state: 'on'\
+        tap_action:\
+          action: ''\
+        hold_action:\
+          action: ''\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:trash-can\
+            color: rgb(128,128,128)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(128,128,128)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:trash-can-outline\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+  - title: Mobile Page 2\
+    path: mobile-page-2\
+    cards:\
+      - type: vertical-stack\
+        cards:\
+          - type: custom:mushroom-title-card\
+            style: |\
+              ha-card \{\
+                background: rgba(255, 255, 255, 0.5);\
+                border: none;\
+              \}\
+            title: ''\
+            subtitle: Calendars\
+            subtitle_tap_action:\
+              action: navigate\
+              navigation_path: /calendar\
+          - type: custom:clock-weather-card\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  background: rgba(0,0,0,0);\
+                  box-shadow: none;\
+                  border: 0px;\
+                \}\
+            entity: weather.openweathermap\
+            title: ''\
+            sun_entity: sun.sun\
+            temperature_sensor: sensor.outside_temperature\
+            humidity_sensor: sensor.outside_humidity\
+            weather_icon_type: line\
+            animated_icon: true\
+            forecast_rows: 1\
+            locale: en-GB\
+            time_pattern: h:mm\
+            time_format: 12\
+            date_pattern: cccc, dd.MMM.yy\
+            hide_today_section: false\
+            hide_forecast_section: true\
+            show_humidity: false\
+            hide_clock: false\
+            hide_date: false\
+            hourly_forecast: false\
+            use_browser_time: false\
+            time_zone: America/Chicago\
+            show_decimal: false\
+            apparent_sensor: sensor.openweathermap_feels_like_temperature\
+            aqi_sensor: sensor.air_quality_index\
+          - type: custom:mushroom-title-card\
+            title: ''\
+            subtitle: Outdoor Climate\
+            subtitle_tap_action:\
+              action: navigate\
+              navigation_path: /lights-switches/outside-climate\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                entity: weather.openweathermap\
+                tap_action:\
+                  action: navigate\
+                  navigation_path: /lights-switches/outside-climate\
+                show_name: false\
+                name: ''\
+                show_state: true\
+                styles:\
+                  card:\
+                    - width: ''\
+                    - height: 70px\
+                  icon: ''\
+                state:\
+                  - value: rainy\
+                    styles:\
+                      icon:\
+                        - color: '#5D8AA8'\
+                        - animation: blink 3s ease infinite\
+                  - value: clear\
+                    styles:\
+                      icon:\
+                        - color: '#00BFFF'\
+                  - value: cloudy\
+                    styles:\
+                      icon:\
+                        - color: darkgrey\
+                  - value: snowy\
+                    styles:\
+                      icon:\
+                        - color: '#B0E0E6'\
+                  - value: sunny\
+                    styles:\
+                      icon:\
+                        - color: '#F4C430'\
+                        - animation: rotating 20s linear infinite\
+              - type: custom:bignumber-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                entity: sensor.outside_temperature\
+                title: Outside\
+                from: bottom\
+                scale: 22px\
+                hideunit: false\
+                round: 0\
+                min: 0\
+                max: 115\
+                severity:\
+                  - value: 50\
+                    bnStyle: var(--label-badge-blue)\
+                  - value: 82\
+                    bnStyle: var(--label-badge-green)\
+                  - value: 90\
+                    bnStyle: var(--label-badge-yellow)\
+                  - value: 115\
+                    bnStyle: var(--label-badge-red)\
+                    color: '#FFFFFF'\
+              - type: custom:bignumber-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                entity: sensor.outside_heat_index\
+                title: Feels Like\
+                from: bottom\
+                scale: 22px\
+                hideunit: false\
+                round: 0\
+                min: 0\
+                max: 120\
+                severity:\
+                  - value: 50\
+                    bnStyle: var(--label-badge-blue)\
+                  - value: 60\
+                    bnStyle: var(--label-badge-green)\
+                  - value: 75\
+                    bnStyle: var(--label-badge-yellow)\
+                  - value: 115\
+                    bnStyle: var(--label-badge-red)\
+                    color: '#fff'\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:bignumber-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                entity: sensor.outside_humidity\
+                title: Humidity\
+                from: bottom\
+                scale: 22px\
+                hideunit: false\
+                round: 0\
+                min: 35\
+                max: 100\
+                severity:\
+                  - value: 30\
+                    bnStyle: rgb(0,0,0)\
+                  - value: 55\
+                    bnStyle: rgb(153,204,255)\
+                  - value: 70\
+                    bnStyle: rgb(0,128,255)\
+                  - value: 100\
+                    bnStyle: rgb(0,76,153)\
+                    color: '#FFFFFF'\
+              - type: custom:button-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                name: Precip Today\
+                entity: sensor.openweathermap_rain\
+                tap_action:\
+                  action: navigate\
+                  navigation_path: /lights-switches/outside-climate\
+                title: Climate\
+                show_state: true\
+                show_units: true\
+                styles:\
+                  card:\
+                    - height: 70px\
+                    - filter: opacity(30%)\
+                  name:\
+                    - font-size: 12px\
+                    - color: white\
+                state:\
+                  - value: 0\
+                    operator: '>'\
+                    styles:\
+                      card:\
+                        - background-color: lightblue\
+                        - filter: opacity(100%)\
+                        - height: 80px\
+                      icon:\
+                        - color: blue\
+                      name:\
+                        - color: blue\
+                      state:\
+                        - color: blue\
+              - type: custom:button-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                name: Wind Speed\
+                entity: sensor.wind_wind_speed\
+                show_state: true\
+                styles:\
+                  card:\
+                    - height: 70px\
+                    - filter: opacity(70%)\
+                  name:\
+                    - font-size: 12px\
+                    - color: white\
+                state:\
+                  - value: 20\
+                    operator: '>='\
+                    styles:\
+                      card:\
+                        - background-color: red\
+                        - filter: opacity(1000%)\
+                        - height: 80px\
+                      icon:\
+                        - color: white\
+                      name:\
+                        - color: white\
+                      state:\
+                        - color: white\
+                  - value: 12\
+                    operator: '>='\
+                    styles:\
+                      card:\
+                        - background-color: yellow\
+                        - filter: opacity(70%)\
+                        - height: 80px\
+                      icon:\
+                        - color: black\
+                      name:\
+                        - color: black\
+                      state:\
+                        - color: black\
+          - type: custom:mushroom-title-card\
+            title: ''\
+            subtitle: Indoor Climate\
+            subtitle_tap_action:\
+              action: navigate\
+              navigation_path: /lights-switches/climate\
+          - type: horizontal-stack\
+            cards:\
+              - type: custom:button-card\
+                entity: climate.hallway\
+                url: /lights-switches/climate\
+                color_type: icon\
+                name: HVAC - Idle\
+                show_state: false\
+                show_name: true\
+                icon: mdi:fan\
+                color: rgb(128,128,128)\
+                state:\
+                  - value: heat\
+                    name: HVAC - Heating\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                        - border-radius: 5%\
+                      icon:\
+                        - height: 40px\
+                        - animation: rotating 2s linear infinite\
+                        - color: rgb(255,0,0)\
+                      name:\
+                        - color: white\
+                  - value: cool\
+                    name: HVAC - Cooling\
+                    styles:\
+                      card:\
+                        - box-shadow: 1px 1px 10px 1px rgb(0,217,255)\
+                        - border-radius: 5%\
+                        - height: 70px\
+                      icon:\
+                        - height: 40px\
+                        - animation: rotating 2s linear infinite\
+                        - color: rgb(0,217,255)\
+                      name:\
+                        - color: white\
+                  - value: 'off'\
+                    name: HVAC - OFF\
+                    styles:\
+                      icon:\
+                        - height: 40px\
+                        - opacity: 25%\
+                        - color: rgb(255,255,255)\
+                      name:\
+                        - opacity: 25%\
+                        - color: gray\
+              - type: custom:bignumber-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;);\
+                    \}\
+                entity: sensor.hallway_temperature\
+                title: Inside temp\
+                from: bottom\
+                scale: 22px\
+                hideunit: false\
+                round: 0\
+                min: 0\
+                max: 115\
+                severity:\
+                  - value: 50\
+                    bnStyle: var(--label-badge-blue)\
+                  - value: 82\
+                    bnStyle: var(--label-badge-green)\
+                  - value: 90\
+                    bnStyle: var(--label-badge-yellow)\
+                  - value: 115\
+                    bnStyle: var(--label-badge-red)\
+                    color: '#FFFFFF'\
+              - type: custom:bignumber-card\
+                card_mod:\
+                  style: |\
+                    ha-card \{\
+                      border-radius: 5px;\
+                    \}\
+                entity: sensor.hallway_humidity\
+                title: Inside Humidity\
+                from: bottom\
+                scale: 22px\
+                hideunit: false\
+                round: 0\
+                min: 20\
+                max: 100\
+                severity:\
+                  - value: 30\
+                    bnStyle: rgb(0,0,0)\
+                  - value: 55\
+                    bnStyle: rgb(153,204,255)\
+                  - value: 70\
+                    bnStyle: rgb(0,128,255)\
+                  - value: 100\
+                    bnStyle: rgb(0,76,153)\
+                    color: '#FFFFFF'\
+      - type: custom:mushroom-chips-card\
+        card_mod:\
+          style: |\
+            ha-card \{ --chip-background: none; \}\
+            :host \{\
+              z-index: 2;\
+              position: fixed;\
+              bottom: 0;\
+              background: none;\
+              padding: 25px;\
+              margin: 0 !important;\
+              left: 50%;\
+              transform: translateX(-50%);\
+              width: calc(100% - 34px);\
+              \
+            \}\
+        chips:\
+          - type: menu\
+          - type: spacer\
+          - type: template\
+            icon: mdi:page-first\
+            tap_action:\
+              action: navigate\
+              navigation_path: /mobile-2/mobile\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                \}\
+          - type: template\
+            icon: mdi:page-last\
+            tap_action:\
+              action: navigate\
+              navigation_path: /mobile-2/mobile-page-2\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                \}\
+          - type: template\
+            icon: >-\
+              \{\{ is_state("input_boolean.kiosk_mode", "off") |\
+              iif("mdi:arrow-expand-all", "mdi:arrow-collapse-all") \}\}\
+            entity: input_boolean.kiosk_mode\
+            tap_action:\
+              action: toggle\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                \{% if is_state('input_boolean.kiosk_mode', 'on') %\}\
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                \{% elif is_state('input_boolean.kiosk_mode', 'off') %\}  \
+                  --chip-background: none;\
+                  --chip-box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                \{% endif %\}\
+                \}\
+    badges:\
+      - type: custom:button-card\
+        name: Door Cam\
+        entity: alarm_control_panel.blink_front_door\
+        visibility:\
+          - condition: state\
+            entity: alarm_control_panel.blink_front_door\
+            state: armed_away\
+        tap_action:\
+          action: more-info\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: armed_away\
+            icon: mdi:doorbell-video\
+            color: rgb(0,128,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 8px\
+          - value: disarmed\
+            icon: mdi:doorbell-video\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 8px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: House Cams\
+        entity: alarm_control_panel.blink_cams\
+        visibility:\
+          - condition: state\
+            entity: alarm_control_panel.blink_cams\
+            state: armed_away\
+        tap_action:\
+          action: more-info\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: armed_away\
+            icon: mdi:shield-home\
+            color: rgb(0,128,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: disarmed\
+            icon: mdi:shield-home-outline\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: The Place\
+        entity: alarm_control_panel.blink_the_place\
+        visibility:\
+          - condition: state\
+            entity: alarm_control_panel.blink_the_place\
+            state: armed_away\
+        tap_action:\
+          action: more-info\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: armed_away\
+            icon: mdi:caravan\
+            color: rgb(0,128,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: disarmed\
+            icon: mdi:caravan\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Fridge Open\
+        entity: binary_sensor.refrigerator_contact\
+        visibility:\
+          - condition: state\
+            entity: binary_sensor.refrigerator_contact\
+            state: 'on'\
+        tap_action:\
+          action: toggle\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:fridge-alert-outline\
+            color: rgb(255,0,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:fridge-outline\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Dishwasher\
+        entity: switch.dishwasher\
+        visibility:\
+          - condition: state\
+            entity: switch.dishwasher\
+            state: 'on'\
+        tap_action:\
+          action: toggle\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:dishwasher\
+            color: rgb(0,255,255)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(0,255,255)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:dishwasher-off\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Washer\
+        entity: sensor.washer\
+        visibility:\
+          - condition: state\
+            entity: sensor.washer\
+            state: 'on'\
+        tap_action:\
+          action: toggle\
+        hold_action:\
+          action: more-info\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:washing-machine\
+            color: rgb(255,0,0)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 14px\
+          - value: 'off'\
+            icon: mdi:washing-machine-off\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Trash & Recycling\
+        entity: calendar.waste_recycling\
+        visibility:\
+          - condition: state\
+            entity: calendar.waste_recycling\
+            state: 'on'\
+        tap_action:\
+          action: ''\
+        hold_action:\
+          action: ''\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:recycle\
+            color: rgb(45, 85, 255)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(45, 85, 255)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:recycle\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+      - type: custom:button-card\
+        name: Trash\
+        entity: calendar.waste\
+        visibility:\
+          - condition: state\
+            entity: calendar.waste\
+            state: 'on'\
+        tap_action:\
+          action: ''\
+        hold_action:\
+          action: ''\
+        show_name: false\
+        show_state: false\
+        state:\
+          - value: 'on'\
+            icon: mdi:trash-can\
+            color: rgb(128,128,128)\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 10px 1px rgba(128,128,128)\
+              icon:\
+                - animation: blink 4s ease infinite\
+              name:\
+                - color: white\
+                - font-size: 4px\
+          - value: 'off'\
+            icon: mdi:trash-can-outline\
+            color: gray\
+            styles:\
+              card:\
+                - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+              name:\
+                - color: gray\
+                - font-size: 4px\
+        styles:\
+          card:\
+            - height: 35px\
+            - width: 35px\
+            - border-radius: 100%\
+            - background: rgb(0,0,0,0.6)\
+          icon:\
+            - width: 25px\
+            - height: ''\
+            - top: 0%\
+    subview: true\
+title: Mobile\
+path: mobile\
+cards:\
+  - type: vertical-stack\
+    cards:\
+      - type: markdown\
+        content: |-\
+          \{% if today_at("07:00") <= now() < today_at("12:00") -%\}\
+           <ha-icon icon="mdi:white-balance-sunny">\
+           </ha-icon> Good morning\
+          \{% elif today_at("12:00") <= now() < today_at("18:00") -%\}\
+           <ha-icon icon="mdi:white-balance-sunny">\
+           </ha-icon> \
+            Good afternoon\
+          \{% elif today_at("18:00") <= now() < today_at("23:59:59") -%\}\
+           <ha-icon icon="mdi:weather-night">\
+           </ha-icon> \
+           Good evening\
+          \{% elif today_at("00:00") <= now() < today_at("07:00") -%\}\
+           <ha-icon icon="mdi:weather-night">\
+           </ha-icon>\
+           Good evening \
+          \{%- endif %\} Family!\
+        card_mod:\
+          style: |\
+            ha-card \{\
+              background: rgba(0,0,0,0);\
+              box-shadow: none;\
+              border: 0px;\
+            \}\
+      - square: false\
+        type: grid\
+        cards:\
+          - type: custom:mushroom-person-card\
+            entity: person.hassio\
+            icon_type: entity-picture\
+            layout: vertical\
+            primary_info: none\
+            fill_container: false\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  background: rgba(0,0,0,0);\
+                  box-shadow: none;\
+                  border: 0px;\
+                \}\
+          - type: custom:mushroom-person-card\
+            entity: person.shannon\
+            icon_type: entity-picture\
+            layout: vertical\
+            primary_info: none\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  background: rgba(0,0,0,0);\
+                  box-shadow: none;\
+                  border: 0px;\
+                \}\
+          - type: custom:mushroom-person-card\
+            icon_type: entity-picture\
+            layout: vertical\
+            primary_info: none\
+            entity: person.gertie\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  background: rgba(0,0,0,0);\
+                  box-shadow: none;\
+                  border: 0px;\
+                \}\
+          - type: custom:mushroom-person-card\
+            icon_type: entity-picture\
+            layout: vertical\
+            primary_info: none\
+            entity: person.kellan\
+            card_mod:\
+              style: |\
+                ha-card \{\
+                  background: rgba(0,0,0,0);\
+                  box-shadow: none;\
+                  border: 0px;\
+                \}\
+        columns: 4\
+      - type: horizontal-stack\
+        cards:\
+          - type: custom:button-card\
+            name: Trash Today\
+            entity: calendar.waste\
+            visibility:\
+              - condition: state\
+                entity: calendar.waste\
+                state: 'on'\
+            tap_action:\
+              action: ''\
+            hold_action:\
+              action: ''\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:trash-can\
+                color: rgb(128,128,128)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgb(128,128,128)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+              - value: 'off'\
+                icon: mdi:trash-can\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+            styles:\
+              card:\
+                - height: 75px\
+                - border-radius: 0%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 100%\
+                - height: 100%\
+                - top: 0%\
+          - type: custom:button-card\
+            color_type: blank-card\
+      - type: horizontal-stack\
+        cards:\
+          - type: custom:button-card\
+            name: Trash & Recycling Today\
+            entity: calendar.waste_recycling\
+            visibility:\
+              - condition: state\
+                entity: calendar.waste_recycling\
+                state: 'on'\
+            tap_action:\
+              action: ''\
+            hold_action:\
+              action: ''\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:recycle\
+                color: rgb(45, 85, 255)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(45, 85, 255)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+              - value: 'off'\
+                icon: mdi:recycle-variant\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+            styles:\
+              card:\
+                - height: 75px\
+                - border-radius: 0%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 75%\
+                - height: 100%\
+                - top: 0%\
+          - type: custom:button-card\
+            color_type: blank-card\
+      - type: custom:mushroom-title-card\
+        style: |\
+          ha-card \{\
+            background: rgba(255, 255, 255, 0.5);\
+            border: none;\
+          \}\
+        title: ''\
+        subtitle: Doors\
+      - type: horizontal-stack\
+        cards:\
+          - type: custom:button-card\
+            name: Front Door\
+            entity: lock.entryway_lock\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: unlocked\
+                icon: mdi:lock-open-variant-outline\
+                color: red\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+                  state:\
+                    - color: white\
+                    - font-size: 8px\
+              - value: locked\
+                icon: mdi:lock-outline\
+                color: green\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+                  state:\
+                    - color: gray\
+                    - font-size: 8px\
+            styles:\
+              card:\
+                - height: 75px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 100%\
+                - height: 100%\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Garage Door\
+            entity: cover.ratgdov25i_ca0e39_door\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: open\
+                icon: mdi:garage-open-variant\
+                color: red\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+                  state:\
+                    - color: white\
+                    - font-size: 8px\
+              - value: closed\
+                icon: mdi:garage-variant\
+                color: green\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+                  state:\
+                    - color: gray\
+                    - font-size: 8px\
+            styles:\
+              card:\
+                - height: 75px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 100%\
+                - height: 100%\
+                - top: 0%\
+      - type: custom:mushroom-title-card\
+        style: |\
+          ha-card \{\
+            background: rgba(255, 255, 255, 0.5);\
+            border: none;\
+          \}\
+        title: ''\
+        subtitle: Lights\
+        subtitle_tap_action:\
+          action: navigate\
+          navigation_path: /lights-switches/all-lights\
+      - type: horizontal-stack\
+        cards:\
+          - type: custom:button-card\
+            name: Living Room\
+            entity: light.living_room\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:lamps\
+                color: rgb(255,241,224)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,241,224)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+              - value: 'off'\
+                icon: mdi:lamps-outline\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - height: ''\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Front Lights\
+            entity: light.outside_lights_front\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:outdoor-lamp\
+                color: RGB(255,255,255)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,255,255)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+              - value: 'off'\
+                icon: mdi:outdoor-lamp\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Outside Rear\
+            entity: light.outside_lights_rear\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:string-lights\
+                color: rgb(255,255,255)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,255,255)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 15px\
+              - value: 'off'\
+                icon: mdi:string-lights\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 15px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - top: 0%\
+      - type: custom:mushroom-title-card\
+        style: |\
+          ha-card \{\
+            background: rgba(255, 255, 255, 0.5);\
+            border: none;\
+          \}\
+        title: ''\
+        subtitle: Misc Lights & Switches\
+        subtitle_tap_action:\
+          action: navigate\
+          navigation_path: /lights-switches/all-lights\
+      - type: horizontal-stack\
+        cards:\
+          - type: custom:button-card\
+            name: Night Light\
+            entity: light.bedroom_lamp\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:desk-lamp\
+                color: rgb(255,241,224)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,241,224)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 10px\
+              - value: 'off'\
+                icon: mdi:desk-lamp-off\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 10px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - height: ''\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Bed Fan\
+            entity: fan.bedroom_fan_socket_1\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:fan\
+                color: rgb(0,128,0)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                  icon:\
+                    - animation: rotating 2s linear infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 10px\
+              - value: 'off'\
+                icon: mdi:fan-off\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 10px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - height: ''\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Shop Lights\
+            entity: light.smart_power_strip_socket_4\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:light-switch\
+                color: rgb(255,255,255)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(255,255,255)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 10px\
+              - value: 'off'\
+                icon: mdi:light-switch-off\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 10px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - height: ''\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Pool Pump\
+            entity: switch.pool_pump_3\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:pump\
+                color: rgb(0,255,255)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(0,255,255)\
+                  icon:\
+                    - animation: rotating 2s linear infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 10px\
+              - value: 'off'\
+                icon: mdi:pump-off\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 10px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - height: ''\
+                - top: 0%\
+          - type: custom:button-card\
+            name: Xmass Tree\
+            entity: light.bedroom_lamp\
+            tap_action:\
+              action: toggle\
+            hold_action:\
+              action: more-info\
+            show_name: true\
+            show_state: false\
+            state:\
+              - value: 'on'\
+                icon: mdi:pine-tree\
+                color: rgb(0,128,0)\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+                  icon:\
+                    - animation: blink 4s ease infinite\
+                  name:\
+                    - color: white\
+                    - font-size: 10px\
+              - value: 'off'\
+                icon: mdi:pine-tree-variant-outline\
+                color: gray\
+                styles:\
+                  card:\
+                    - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+                  name:\
+                    - color: gray\
+                    - font-size: 10px\
+            styles:\
+              card:\
+                - height: 50px\
+                - border-radius: 5%\
+                - background: rgb(0,0,0,0.6)\
+              icon:\
+                - width: 35px\
+                - height: ''\
+                - top: 0%\
+  - type: custom:mushroom-chips-card\
+    card_mod:\
+      style: |\
+        ha-card \{ --chip-background: none; \}\
+        :host \{\
+          z-index: 2;\
+          position: fixed;\
+          bottom: 0;\
+          background: none;\
+          padding: 10px;\
+          margin: 0 !important;\
+          left: 50%;\
+          transform: translateX(-50%);\
+          width: calc(100% - 34px);\
+          \
+        \}\
+    chips:\
+      - type: menu\
+      - type: spacer\
+      - type: template\
+        icon: mdi:page-first\
+        tap_action:\
+          action: navigate\
+          navigation_path: /lights-switches/mobile\
+        card_mod:\
+          style: |\
+            ha-card \{\
+              --chip-background: red;\
+            \}\
+      - type: template\
+        icon: mdi:page-last\
+        tap_action:\
+          action: navigate\
+          navigation_path: /lights-switches/mobile-page-2\
+        card_mod:\
+          style: |\
+            ha-card \{\
+              --chip-background: black;\
+            \}\
+      - type: template\
+        icon: >-\
+          \{\{ is_state("input_boolean.kiosk_mode", "off") |\
+          iif("mdi:arrow-expand-all", "mdi:arrow-collapse-all") \}\}\
+        entity: input_boolean.kiosk_mode\
+        tap_action:\
+          action: toggle\
+        card_mod:\
+          style: |\
+            ha-card \{\
+            \{% if is_state('input_boolean.kiosk_mode', 'on') %\}\
+              --chip-background: red;\
+            \{% elif is_state('input_boolean.kiosk_mode', 'off') %\}  \
+              --chip-background: green;\
+            \{% endif %\}\
+            \}\
+badges:\
+  - type: custom:button-card\
+    name: Door Cam\
+    entity: alarm_control_panel.blink_front_door\
+    visibility:\
+      - condition: state\
+        entity: alarm_control_panel.blink_front_door\
+        state: armed_away\
+    tap_action:\
+      action: more-info\
+    hold_action:\
+      action: more-info\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: armed_away\
+        icon: mdi:doorbell-video\
+        color: rgb(0,128,0)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 8px\
+      - value: disarmed\
+        icon: mdi:doorbell-video\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 8px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: House Cams\
+    entity: alarm_control_panel.blink_cams\
+    visibility:\
+      - condition: state\
+        entity: alarm_control_panel.blink_cams\
+        state: armed_away\
+    tap_action:\
+      action: more-info\
+    hold_action:\
+      action: more-info\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: armed_away\
+        icon: mdi:shield-home\
+        color: rgb(0,128,0)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 4px\
+      - value: disarmed\
+        icon: mdi:shield-home-outline\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: The Place\
+    entity: alarm_control_panel.blink_the_place\
+    visibility:\
+      - condition: state\
+        entity: alarm_control_panel.blink_the_place\
+        state: armed_away\
+    tap_action:\
+      action: more-info\
+    hold_action:\
+      action: more-info\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: armed_away\
+        icon: mdi:caravan\
+        color: rgb(0,128,0)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(0,128,0)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 4px\
+      - value: disarmed\
+        icon: mdi:caravan\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: Fridge Open\
+    entity: binary_sensor.refrigerator_contact\
+    visibility:\
+      - condition: state\
+        entity: binary_sensor.refrigerator_contact\
+        state: 'on'\
+    tap_action:\
+      action: toggle\
+    hold_action:\
+      action: more-info\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: 'on'\
+        icon: mdi:fridge-alert-outline\
+        color: rgb(255,0,0)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 4px\
+      - value: 'off'\
+        icon: mdi:fridge-outline\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: Dishwasher\
+    entity: switch.dishwasher\
+    visibility:\
+      - condition: state\
+        entity: switch.dishwasher\
+        state: 'on'\
+    tap_action:\
+      action: toggle\
+    hold_action:\
+      action: more-info\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: 'on'\
+        icon: mdi:dishwasher\
+        color: rgb(0,255,255)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(0,255,255)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 4px\
+      - value: 'off'\
+        icon: mdi:dishwasher-off\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: Washer\
+    entity: sensor.washer\
+    visibility:\
+      - condition: state\
+        entity: sensor.washer\
+        state: 'on'\
+    tap_action:\
+      action: toggle\
+    hold_action:\
+      action: more-info\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: 'on'\
+        icon: mdi:washing-machine\
+        color: rgb(255,0,0)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(255,0,0)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 14px\
+      - value: 'off'\
+        icon: mdi:washing-machine-off\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: Trash & Recycling\
+    entity: calendar.waste_recycling\
+    visibility:\
+      - condition: state\
+        entity: calendar.waste_recycling\
+        state: 'on'\
+    tap_action:\
+      action: ''\
+    hold_action:\
+      action: ''\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: 'on'\
+        icon: mdi:recycle\
+        color: rgb(45, 85, 255)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(45, 85, 255)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 4px\
+      - value: 'off'\
+        icon: mdi:recycle\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+  - type: custom:button-card\
+    name: Trash\
+    entity: calendar.waste\
+    visibility:\
+      - condition: state\
+        entity: calendar.waste\
+        state: 'on'\
+    tap_action:\
+      action: ''\
+    hold_action:\
+      action: ''\
+    show_name: false\
+    show_state: false\
+    state:\
+      - value: 'on'\
+        icon: mdi:trash-can\
+        color: rgb(128,128,128)\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 10px 1px rgba(128,128,128)\
+          icon:\
+            - animation: blink 4s ease infinite\
+          name:\
+            - color: white\
+            - font-size: 4px\
+      - value: 'off'\
+        icon: mdi:trash-can-outline\
+        color: gray\
+        styles:\
+          card:\
+            - box-shadow: 1px 1px 1px 1px rgba(140,144,144)\
+          name:\
+            - color: gray\
+            - font-size: 4px\
+    styles:\
+      card:\
+        - height: 35px\
+        - width: 35px\
+        - border-radius: 100%\
+        - background: rgb(0,0,0,0.6)\
+      icon:\
+        - width: 25px\
+        - height: ''\
+        - top: 0%\
+}
